@@ -12,70 +12,82 @@ from os import system
 def clear_screen():
     system('clear')
 
-gdollar = ['SKELETON', 'GHOST', 'HEADLESS AXEMAN']
+enemies = ['SKELETON', 'GHOST', 'HEADLESS AXEMAN']
+comment = 'GOOD LUCK'
+room_global = 0
+hour = 9; minutes = int(random()*10) + 10
+pulse = 50
 
-rdollar = 'GOOD LUCK'
-rm = 0
-h = 9; m = int(random()*10) +10
-p = 50
 while(True):
-    clear_screen(); print(''); print('')
+    clear_screen()
+    print(''); print('')
     print('TOWER OF TERROR')
     print('===============')
-    print(''); print(rdollar)
-    rdollar = ''; fl = rm//5
-    r = rm - fl*5 +1
+    print(''); print(comment)
+    comment = ''
+    floor = room_global//5
+    room_in_floor = room_global - floor*5 + 1
     print(''); print('YOU ARE ON')
-    if fl==0: print('THE GROUND FLOOR')
-    if fl==6: print('THE TOP FLOOR')
-    if fl>0 and fl<6: print('FLOOR ', fl)
-    print('IN ROOM ', r)
-    print(''); print('THE TIME IS ', h,'.', m,' PM')
-    print(''); print('YOUR PULSE RATE IS ', p)
-    gf = 0
-    if rm == 30:
+
+    if floor == 0: print('THE GROUND FLOOR')
+    if floor == 6: print('THE TOP FLOOR')
+    if floor>0 and floor<6: print('FLOOR ', floor)
+
+    print('IN ROOM_global ', room_in_floor)
+    print(''); print('THE TIME IS ', hour,'.', minutes,' PM')
+    print(''); print('YOUR PULSE RATE IS ', pulse)
+    flag = 0
+
+    if room_global == 30:
         print('WELL DONE ')
         break
-    tr = int(random()*9 +1)
+    
+    trap = int(random()*9 + 1)
+
     if random() > 0.6:
         ty = int(random()*3)
-        wdollar = gdollar[ty]
-        s = int(random()*5) +fl +ty*2
-        print(''); print('AHEAD YOU SEE A ', wdollar)
-        gf = 1
+        enemy = enemies[ty]
+        shock = int(random()*5) + floor + ty*2
+        print(''); print('AHEAD YOU SEE A ', enemy)
+        flag = 1
 
     print(''); print('RETREAT OR GO ON (R/G)')
-    idollar = input()
+    action = input()
+
     # 250 IF I$<>"G" AND I$<>"R" THEN GOTO 240
-    if idollar == 'g':
-        if gf == 1:
-            p = p + s*2
-            rdollar = 'AAAHHHH!'
-        p = p -1
-        rm = rm +1
 
-    if idollar == 'r':
-        rm = rm -1
-        p = p -5
+    if action == 'g':
+        if flag == 1:
+            pulse = pulse + shock*2
+            comment = 'AAAHHHH!'
+        pulse = pulse - 1
+        room_global = room_global + 1
 
-    if rm == -1: rm = 0
-    m = m + int(random()*3 +1)
-    if m > 59:
-        m = m -60
-        h = h +1
+    if action == 'r':
+        room_global = room_global - 1
+        pulse = pulse - 5
 
-    if h == 12:
+    if room_global == - 1: room_global = 0
+
+    minutes = minutes + int(random()*3 +1)
+    
+    if minutes > 59:
+        minutes = minutes -60
+        hour = hour +1
+
+    if hour == 12:
         print("IT'S MIDNIGHT!")
         print('TOO LATE!')
         break
 
-    if p > 150:
+    if pulse > 150:
         print('YOU HAVE GONE MAD AND')
         print('LEAPT FROM A WINDOW!')
         break
 
-    if p < 40: p = 40
-    if fl==tr and random()>0.5:
-        rdollar = 'YOU FELL THROUGH A TRAP DOOR!'
-        rm = rm -5
-        p = p +10
+    if pulse < 40: pulse = 40
+
+    if floor==trap and random()>0.5:
+        comment = 'YOU FELL THROUGH A TRAP DOOR!'
+        room_global = room_global - 5
+        pulse = pulse + 10
