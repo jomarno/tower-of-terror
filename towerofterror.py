@@ -1,10 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Created on Wed May 26 17:34:45 2021
-
-@author: vanilla
-"""
 
 from random import random
 from os import system
@@ -15,7 +10,7 @@ def clear_screen():
 enemies = ['SKELETON', 'GHOST', 'HEADLESS AXEMAN']
 comment = 'GOOD LUCK'
 room_global = 0
-hour = 9; minutes = int(random()*10) + 10
+hour, minutes = ( 9, int(random()*10) + 10 )
 pulse = 50
 
 while(True):
@@ -33,7 +28,7 @@ while(True):
     if floor == 6: print('THE TOP FLOOR')
     if floor>0 and floor<6: print('FLOOR ', floor)
 
-    print('IN ROOM_global ', room_in_floor)
+    print('IN ROOM ', room_in_floor)
     print(''); print('THE TIME IS ', hour,'.', minutes,' PM')
     print(''); print('YOUR PULSE RATE IS ', pulse)
     flag = 0
@@ -50,22 +45,24 @@ while(True):
         shock = int(random()*5) + floor + ty*2
         print(''); print('AHEAD YOU SEE A ', enemy)
         flag = 1
-
+    
     print(''); print('RETREAT OR GO ON (R/G)')
-    action = input()
 
-    # 250 IF I$<>"G" AND I$<>"R" THEN GOTO 240
+    while(True):
+        action = input()
 
-    if action == 'g':
-        if flag == 1:
-            pulse = pulse + shock*2
-            comment = 'AAAHHHH!'
-        pulse = pulse - 1
-        room_global = room_global + 1
+        if action.lower() == 'g':
+            if flag == 1:
+                pulse = pulse + shock*2
+                comment = 'AAAHHHH!'
+            pulse = pulse - 1
+            room_global = room_global + 1
+            break
 
-    if action == 'r':
-        room_global = room_global - 1
-        pulse = pulse - 5
+        elif action.lower() == 'r':
+            room_global = room_global - 1
+            pulse = pulse - 5
+            break
 
     if room_global == - 1: room_global = 0
 
