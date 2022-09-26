@@ -10,7 +10,7 @@ def clear_screen():
 enemies = ['SKELETON', 'GHOST', 'HEADLESS AXEMAN']
 comment = 'GOOD LUCK'
 room_global = 0
-hour, minutes = ( 9, int(random()*10) + 10 )
+hour, minutes = 9, int(random()*10) + 10
 pulse = 50
 
 while(True):
@@ -40,9 +40,9 @@ while(True):
     trap = int(random()*9 + 1)
 
     if random() > 0.6:
-        ty = int(random()*3)
-        enemy = enemies[ty]
-        shock = int(random()*5) + floor + ty*2
+        enemy_type = int(random()*3)
+        enemy = enemies[enemy_type]
+        shock = int(random()*5) + floor + enemy_type*2
         print(''); print('AHEAD YOU SEE A ', enemy)
         flag = 1
     
